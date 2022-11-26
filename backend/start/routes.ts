@@ -23,4 +23,5 @@ import 'App/Controllers/Http/UsersController';
 
 Route.get('/users/', 'UsersController.index');
 Route.get('/users/:id', 'UsersController.get');
-Route.post('/users/create', 'UsersController.create');
+Route.post('/users/', 'UsersController.create');
+Route.delete('/users/:id', 'UsersController.delete');

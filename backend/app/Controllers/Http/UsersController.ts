@@ -1,3 +1,4 @@
+import {Exception} from '@adonisjs/core/build/standalone';
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from 'App/Models/User';
 
@@ -13,7 +14,6 @@ export default class UsersController {
     }
 
     public async create(ctx: HttpContextContract) {
-        console.log(ctx.request.body());
         const { name, userName, bio, email, password, birthDate } = ctx.request.body();
         const user = User.create({
             name,
@@ -25,5 +25,19 @@ export default class UsersController {
         });
 
         return user;
+    }
+
+    public async delete(ctx: HttpContextContract) {
+        try {
+            const id = parseInt(ctx.request.param('id'));
+            const user = await User.findOrFail(id);
+            return await user.delete();
+        } catch (e) {
+            console.error(e.message);
+            ctx.response.status(404);
+            return {
+                'error': 'User does not exist',
+            };
+        }
     }
 }
