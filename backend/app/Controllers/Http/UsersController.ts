@@ -3,29 +3,13 @@ import User from 'App/Models/User';
 
 export default class UsersController {
     public async index(ctx: HttpContextContract) {
-        return [
-            {
-                name: 'Rick Astley',
-                userName: '@rickroll_man#1234',
-                email: 'nevergonnagive@you.up',
-                bio: 'Never gonna let you down',
-                birthDate: new Date(1966, 2, 6),
-                posts: [
-                    {
-                        title: 'Never gonna run around',
-                        content: 'And desert you',
-                    },
-                    {
-                        title: 'Never gonna make you cry',
-                        content: 'Never gonna say goodbye',
-                    },
-                    {
-                        title: 'Never gonna tell a lie',
-                        content: 'And hurt you',
-                    }
-                ],
-            }
-        ];
+        return await User.all();
+    }
+
+    public async get(ctx: HttpContextContract) {
+        const id = parseInt(ctx.request.param('id'));
+
+        return User.find(id);
     }
 
     public async create(ctx: HttpContextContract) {

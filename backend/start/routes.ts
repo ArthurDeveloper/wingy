@@ -21,5 +21,6 @@
 import Route from '@ioc:Adonis/Core/Route';
 import 'App/Controllers/Http/UsersController';
 
-Route.get('/users/get', 'UsersController.index');
+Route.get('/users/', 'UsersController.index');
+Route.get('/users/:id', 'UsersController.get');
 Route.post('/users/create', 'UsersController.create');
